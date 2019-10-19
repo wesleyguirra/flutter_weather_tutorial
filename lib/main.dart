@@ -26,9 +26,16 @@ void main() {
   );
 
   runApp(
-    BlocProvider<ThemeBloc>(
-      builder: (context) => ThemeBloc(),
-      child: App(weatherRepository: weatherRepository),
+    MultiBlocProvider(
+        providers: [
+          BlocProvider<ThemeBloc>(
+            builder: (context) => ThemeBloc(),
+          ),
+          BlocProvider<SettingsBloc>(
+            builder: (context) => SettingsBloc(),
+          )
+        ],
+        child: App(weatherRepository: weatherRepository),
     )
   );
 }
